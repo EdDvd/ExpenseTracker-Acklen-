@@ -25,7 +25,7 @@ function app_init(db){
   app.use('/', indexRouter);
   app.use('/users', usersRouter);
   
-  var apiRouter= require('./routes/api/index');
+  var apiRouter= require('./routes/api/index')(db);
   app.use('/api',apiRouter);
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
