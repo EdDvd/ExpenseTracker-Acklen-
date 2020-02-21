@@ -6,7 +6,7 @@
 
  var MongoClient =require('mongodb').MongoClient;
  var mongoUri ='mongodb://localhost:27017';
- var mongoDB ='ExpTrcDB';
+ var mongoDB ='expenseTrckBD';
 
  MongoClient.connect(mongoUri,{},(err, client)=>{
 if(err){
