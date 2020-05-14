@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
-import Col from 'react-bootstrap/Col'
+//import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-export class NewWallet extends Component {
+//import acontent from './content'
+
+class NewWallet extends Component {
+    
+   onClick=()=>{
+       this.props.walletHandle
+   }
     render() {
         return (
             <Container>
@@ -18,10 +24,10 @@ export class NewWallet extends Component {
                         <Form.Control type="money" placeholder="" />
                     </Form.Group>
                     
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" onClick={this.onClick}>
                         Submit
                     </Button>
-                </Form>
+                </Form>   
 
             </Container>
         )

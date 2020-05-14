@@ -5,7 +5,7 @@ import './App.css';
 import Navigation from './components/navigation'
 import Content from './components/content'
 import LowBar from './components/LowBar'
-import initWallet from './components/initWallet'
+
 function App() {
   
   return (
@@ -14,9 +14,9 @@ function App() {
     
      <Navigation/>
      
-       <Route path="/" exact component={initWallet}/>
+       
      
-     <Route path="/" exact component={Content}/>};
+     <Route path="/" exact component={Content}/>
        <LowBar/>
     </Router>
    
