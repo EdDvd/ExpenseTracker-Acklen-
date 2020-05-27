@@ -3,7 +3,10 @@ import Badge from 'react-bootstrap/Badge'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
+import Transactions from './transactions'
+
 class budState extends Component {
+   
     render() {
         return (
             <div>
@@ -13,7 +16,7 @@ class budState extends Component {
                 <Row><Col><h2>Salidas</h2></Col> <Col><h2>0.00</h2></Col></Row>
                 <Row><Col><h2>Totale</h2></Col><Col><h2>0.00</h2></Col></Row>
                 </Col>
-                
+                <Transactions/>
             </Container>
             </div>
         )

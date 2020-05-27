@@ -17,7 +17,7 @@ export class navigation extends Component {
                             Wallet
                         </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
+                        <Dropdown.Menu alignRight>
                             <Dropdown.Item href="#/action-1">Budget</Dropdown.Item>
                             <Dropdown.Item href="#/action-2">Clean</Dropdown.Item>
                             <Dropdown.Item href="#/action-3">Change Name</Dropdown.Item>

@@ -7,9 +7,7 @@ import Container from 'react-bootstrap/Container'
 
 class NewWallet extends Component {
     
-   onClick=()=>{
-       this.props.walletHandle
-   }
+  
     render() {
         return (
             <Container>
@@ -24,7 +22,7 @@ class NewWallet extends Component {
                         <Form.Control type="money" placeholder="" />
                     </Form.Group>
                     
-                    <Button variant="primary" type="submit" onClick={this.onClick}>
+                    <Button variant="primary" type="submit" onClick={this.props.walletHandle}>
                         Submit
                     </Button>
                 </Form>   
