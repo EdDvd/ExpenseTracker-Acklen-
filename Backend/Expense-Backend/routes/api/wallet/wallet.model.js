@@ -1,12 +1,25 @@
-var ObjectId = require('mongodb').ObjectID;
+const mongoose = require ('mongoose')
+const Schema = mongoose.Schema
 
+var WalletSchema = Schema({
+    Name: {type: String, require: true},
+    Budget: {type: String, require: true},
+    Transaction: {
+                  Title: {type: String},
+                  Amount: {type: Number},
+                  Category: {type: String}
+                 },
+    Created: {type: Date, default: Date.now}
+})
+
+/*var ObjectId = require('mongoose').ObjectID;
 
 function budgetModel(db){
 
    let budOption ={};
    var walletCollection =db.collection("Wallets");
 
-budOption.getWallet=(hndl)=>{
+   budOption.getWallet=(hndl)=>{
     walletCollection.find({}).toArray(
         (err,rslt)=>{
             if(err)
@@ -14,7 +27,9 @@ budOption.getWallet=(hndl)=>{
                 console.log(err);
                 return hndl(err,null);
             }
-          return hndl(null,rslt);
+           else{ 
+            
+          return hndl(null,rslt);}
         }
     );
 }//get wallet
@@ -33,7 +48,6 @@ budOption.getWallet=(hndl)=>{
    }// save new
 
     return budOption;
-
 }
-
-module.exports=budgetModel;
+module.exports=budgetModel;*/
+module.exports= model('Wallet',WalletSchema);

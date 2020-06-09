@@ -1,9 +1,18 @@
 var express =require('express');
 var router= express.Router();
 
+var Wallet = require('./wallet.model');
 
+function walletApi(){
 
-function  budgetApi(db){
+  router.get('/',(req, res)=>{
+    res.send('wallet 2.0');
+  });
+
+  return router;
+}
+
+/*function  budgetApi(db){
   var budgetModel =require('./budget.model')(db);
   
 router.get('/',  (req, res)=> {
@@ -27,12 +36,11 @@ budgetModel.getWallet((err,wallet)=>{
 
 router.post('/new',(req,res)=>{
 
-
 var newWallet= Object.assign({}, req.body,
   {
-    "Id":req.body.Id,
     "Name":req.body.Name,
-    "Budget":parseInt(re.body.Budget)
+    "Amount":parseInt(re.body.Amount),
+    "Type":req.body.Type
 
   });// end object.assign
 
@@ -47,12 +55,6 @@ var newWallet= Object.assign({}, req.body,
     } 
     });//end savenew
    
-  });//end post new
+  });*///end post new
 
-
-
-  return router;
-
-}
-
-module.exports=budgetApi;
+module.exports= walletApi;
