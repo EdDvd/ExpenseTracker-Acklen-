@@ -1,26 +1,28 @@
-import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import Navigation from './components/navigation'
+
 import Content from './components/content'
 import LowBar from './components/LowBar'
 
-function App() {
-  
-  return (
-    
-   <Router>
-    
-     <Navigation/>
-     
-       
-     
-     <Route path="/" exact component={Content}/>
-       <LowBar/>
-    </Router>
-   
-  );
-}
+export class App extends Component {
+  constructor(props) {
+    super(props)
 
-export default App;
+    this.state = {
+      changeWalletRequest: true
+    }
+  }
+
+
+  render() {
+    return (
+      <div>
+
+        <Content />
+        <LowBar />
+      </div>
+    )
+  }
+}
+export default App
+
