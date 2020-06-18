@@ -40,7 +40,6 @@ router.patch('/:id', async (req, res) => {
 router.post('/:id/transactions', async (req, res) => {
     const { title, amount, type } = req.body;
     let wallet = await Wallet.findById(req.params.id);
-    
     wallet.transactions.push({ title, amount, type });
     await wallet.save();
     res.json(wallet);

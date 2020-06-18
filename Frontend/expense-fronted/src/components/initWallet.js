@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-//import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
@@ -15,27 +14,41 @@ class NewWallet extends Component {
             name: " ",
             budget: " ",
             message: " ",
+            walletID:" ",
             showModal: false
         }
     }
 
     changeMethod = (event) => {
         this.setState({ [event.target.name]: event.target.value })
-        console.log(event.target.value)
+        
     }
 
     submitMethod = (event) => {
+        let walletID = this.props.walletIDHandle
+        if(walletID.lenght=== undefined)
+        console.log('seeeeeh')
         event.preventDefault()
-        console.log(this.state)
-
+        
         if (this.state.name === " " || this.state.budget === " ") {
             this.setState({
                 message: "empty fields",
                 showModal: true
             })
         }
+        else if(walletID.lenght===undefined){
+            Axios.post('/api/wallets/', this.state)
+            .then(response => {
+                console.log(response)
+                this.setState({
+                    showModal: true,
+                    message: "wallet changed"
+                })
+            })
+            .catch(err => { console.log(err) }) 
+        }
         else {
-            Axios.patch('/api/wallets/5eddb88d32257b39805a86e2', this.state)
+            Axios.patch('/api/wallets/'+walletID, this.state)
                 .then(response => {
                     console.log(response)
                     this.setState({
@@ -45,19 +58,20 @@ class NewWallet extends Component {
                 })
                 .catch(err => { console.log(err) })
         }
+       this.props.refresh()
     }
     closeModal = () => {
         this.setState({ showModal: false })
         if (this.state.message === "wallet changed") {
-            this.props.walletHandle()
+            this.props.refresh()
         }
     }
     closeButton = () => {
-        this.props.walletHandle()
+        this.props.refresh()
     }
 
     render() {
-
+     
         return (
 
             <Container>

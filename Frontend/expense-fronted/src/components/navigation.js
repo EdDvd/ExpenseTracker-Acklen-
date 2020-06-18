@@ -20,8 +20,8 @@ class Navigation extends Component {
                         </Dropdown.Toggle>
                         <Dropdown.Menu alignRight>
                             <Dropdown.Item href="" onClick={this.props.walletRequestHandle} >Change Budget</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Clean</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Change Name</Dropdown.Item>
+                            <Dropdown.Item href="" onClick={this.props.addWalletHandle}>New Wallet</Dropdown.Item>
+                            <Dropdown.Item href="" onClick={this.props.unchooseWalletHandle}>Change Wallet</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </Form>

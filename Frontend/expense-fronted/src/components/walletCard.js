@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import Axios from 'axios'
 class walletCard extends Component {
     constructor(props) {
         super(props)
@@ -20,6 +22,10 @@ class walletCard extends Component {
     mouseOut=()=>{
         this.setState({bgColor:"info"})
     }
+    deleteMethod=()=>{
+        Axios.delete('/api/wallets/'+this.props.eachWalletHandle._id)
+        this.props.refresh()
+    }
     render() {
         return (
             <div>
@@ -28,8 +34,7 @@ class walletCard extends Component {
                     text={"light"} 
                     style={{ width: '18rem' }}
                     onMouseOver={this.mouseOver}
-                    onMouseOut={this.mouseOut}
-                    onClick={this.selectWallet}>
+                    onMouseOut={this.mouseOut}>
                     <Card.Header>Wallet</Card.Header>
                     <Card.Body>
                         <Card.Title>Name: {this.props.eachWalletHandle.name}</Card.Title>
@@ -37,6 +42,8 @@ class walletCard extends Component {
                             <br/>
                             Budget: {this.props.eachWalletHandle.budget}
                           </Card.Text>
+                          <Button variant='outline-light' onClick={this.selectWallet}>Select</Button>{' '}
+                          <Button variant='outline-light' onClick={this.deleteMethod}>Delete</Button>
                         </Card.Body>
                 </Card>
                 <br/>

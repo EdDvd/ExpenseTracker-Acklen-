@@ -21,13 +21,19 @@ class content extends Component {
 
     async componentDidMount() {
         let walletVerify = await Axios.get("/api/wallets");
-
-        if (walletVerify === null) {
+        let cont=0
+        walletVerify.data.map(wallets=>(cont++))
+        if (cont<1) {
             this.setState({
                 walletExist: false
             });
         }
-        else { this.setState({ walletExist: true, allWallets: walletVerify }); }
+        else if(cont>0) { 
+            this.setState({ walletExist: true, allWallets: walletVerify }); 
+             console.log(walletVerify.data.lenght)    
+            }
+      
+       console.log(cont)   
     }
 
     walletRequest = () => {
@@ -39,28 +45,46 @@ class content extends Component {
         if (this.state.changeWalletRequest === true) {
             this.setState({ changeWalletRequest: false })
         }
-        console.log(this.state.walletExist)
-    }
+        /*if (this.state.walletExist===false)
+            this.setState({walletExist:true})*/
+            this.componentDidMount()
+        }
 
     chooseWallet = (walletID) => {
-        this.setState({ selectedWallet: walletID })
-        console.log(walletID)
+        this.setState({ selectedWallet: walletID})
     }
 
-    render() {
+    unchooseWallet=()=>{
+        this.setState({selectedWallet:" "})
+    }
+
+    addWallet=()=>{
+        this.setState({walletExist:false, selectedWallet:" "})
+        if(this.state.changeWalletRequest===false)
+        this.setState({changeWalletRequest:true})
+    }
+
+    refresh=()=>{
+        this.componentDidMount()
+    }
+    
+        render() {
         const walletExist = this.state.walletExist
         const walletRequest = this.state.changeWalletRequest
         const walletSelected = this.state.selectedWallet
 
         if (walletExist === false || walletRequest === true) {
             return <NewWallet
-                walletHandle={this.walletChanged} />
+                walletIDHandle={walletSelected}    
+                refresh={this.walletChanged} />
         }
 
         else if (walletExist === true && walletSelected === " ") {
             return (
                 <div><CardDeck>{this.state.allWallets.data.map(eachWallet => (
-                    <WalletCard key={eachWallet._id} eachWalletHandle={eachWallet} chooseWalletHandle={this.chooseWallet} />
+                    <WalletCard key={eachWallet._id} eachWalletHandle={eachWallet} 
+                    chooseWalletHandle={this.chooseWallet} 
+                    refresh={this.refresh}/>
                 )
                 )}
                 </CardDeck></div>
@@ -69,9 +93,10 @@ class content extends Component {
         else {
             return (
                 <div>
-                    <Navigation walletRequestHandle={this.walletRequest} />
+                    <Navigation  walletRequestHandle={this.walletRequest} 
+                                unchooseWalletHandle={this.unchooseWallet}
+                                 addWalletHandle={this.addWallet}/>
                     <BudState selectedWalletHandle={walletSelected}/>
-
                 </div>
             )
 
