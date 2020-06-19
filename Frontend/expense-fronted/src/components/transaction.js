@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import Button from 'react-bootstrap/Button'
 import Select from 'react-select'
 import Axios from 'axios'
+
 class Transaction extends Component {
     constructor(props) {
         super(props)
@@ -12,28 +13,28 @@ class Transaction extends Component {
             title: " ",
             amount: 0,
             type: "output",
-            msg:"",
+            msg: "",
             msgVisible: "hidden"
         }
     }
 
     changeMethod = (event) => {
-       
+
         event.preventDefault()
         this.setState({ title: event.target.value })
         this.setState({ msgVisible: "hidden" })
-
     }
 
     changeAmountMethod = (event) => {
-        let regNum=/\d/g 
+        let regNum = /\d/g
+
         event.preventDefault()
-        if(regNum.test(event.target.value)===true)
-        {this.setState({ amount: event.target.value * 1 })
-        this.setState({ msgVisible: "hidden" })
+        if (regNum.test(event.target.value) === true) {
+            this.setState({ amount: event.target.value * 1 })
+            this.setState({ msgVisible: "hidden" })
         }
-        else{
-            event.target.value=""
+        else {
+            event.target.value = ""
         }
 
     }
@@ -49,44 +50,31 @@ class Transaction extends Component {
         else {
             this.setState({ amount: this.state.amount })
         }
-        console.log(this.state.amount)
-        console.log(this.state.type)
     }
-
-
-
 
     submitMethod = (event) => {
         event.preventDefault()
         if (this.state.title === " " || this.state.amount === " ") {
-            this.setState({ msgVisible: "visible", msg:"empty fields" })
+            this.setState({ msgVisible: "visible", msg: "empty fields" })
         }
-        else if(this.state.amount===0){
-            this.setState({msgVisible: "visible",msg:"amount cannot be 0"})
+        else if (this.state.amount === 0) {
+            this.setState({ msgVisible: "visible", msg: "amount cannot be 0" })
         }
         else {
             Axios.post('/api/wallets/' + this.props.ID + '/transactions', (this.state))
                 .then(response => {
                     console.log(response)
-                    console.log(this.state)
                     this.props.refresh()
-
                 })
                 .catch(err => { console.log(err) })
-
-            console.log(this.state.amount)
-            console.log(this.state.type)
-            
             this.props.openClose()
-            
         }
-
     }
 
     closeMethod = () => {
         this.props.openClose()
-
     }
+
     render() {
         const optionType = [{ value: 'input', label: 'In' },
         { value: 'output', label: 'Out' }]

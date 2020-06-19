@@ -24,10 +24,22 @@ class NewWallet extends Component {
         
     }
 
+    changeBudgetMethod=(event)=>{
+        let regNum = /\d/g
+        
+        event.preventDefault()
+        if (regNum.test(event.target.value) === true) {
+            this.setState({ budget: event.target.value * 1 })
+            
+        }
+        else {
+            event.target.value = ""
+        }
+    }
+
     submitMethod = (event) => {
         let walletID = this.props.walletIDHandle
-        if(walletID.lenght=== undefined)
-        console.log('seeeeeh')
+       
         event.preventDefault()
         
         if (this.state.name === " " || this.state.budget === " ") {
@@ -36,16 +48,18 @@ class NewWallet extends Component {
                 showModal: true
             })
         }
-        else if(walletID.lenght===undefined){
+        
+        else if(walletID.data===undefined){
             Axios.post('/api/wallets/', this.state)
             .then(response => {
-                console.log(response)
+               // console.log(response)
                 this.setState({
                     showModal: true,
                     message: "wallet changed"
                 })
             })
             .catch(err => { console.log(err) }) 
+           
         }
         else {
             Axios.patch('/api/wallets/'+walletID, this.state)
@@ -58,6 +72,7 @@ class NewWallet extends Component {
                 })
                 .catch(err => { console.log(err) })
         }
+        
        this.props.refresh()
     }
     closeModal = () => {
@@ -71,7 +86,7 @@ class NewWallet extends Component {
     }
 
     render() {
-     
+        
         return (
 
             <Container>
@@ -86,7 +101,7 @@ class NewWallet extends Component {
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword" >
                         <Form.Label>Budget</Form.Label>
-                        <Form.Control type="money" placeholder="" name="budget" onChange={this.changeMethod} />
+                        <Form.Control type="money" placeholder="" name="budget" onChange={this.changeBudgetMethod} />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Submit

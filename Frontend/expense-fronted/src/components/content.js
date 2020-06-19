@@ -30,10 +30,10 @@ class content extends Component {
         }
         else if(cont>0) { 
             this.setState({ walletExist: true, allWallets: walletVerify }); 
-             console.log(walletVerify.data.lenght)    
+                
             }
       
-       console.log(cont)   
+        
     }
 
     walletRequest = () => {
@@ -45,8 +45,7 @@ class content extends Component {
         if (this.state.changeWalletRequest === true) {
             this.setState({ changeWalletRequest: false })
         }
-        /*if (this.state.walletExist===false)
-            this.setState({walletExist:true})*/
+        
             this.componentDidMount()
         }
 
@@ -56,10 +55,11 @@ class content extends Component {
 
     unchooseWallet=()=>{
         this.setState({selectedWallet:" "})
+        
     }
 
     addWallet=()=>{
-        this.setState({walletExist:false, selectedWallet:" "})
+    this.setState({walletExist:false, selectedWallet:" "})
         if(this.state.changeWalletRequest===false)
         this.setState({changeWalletRequest:true})
     }
@@ -96,6 +96,7 @@ class content extends Component {
                     <Navigation  walletRequestHandle={this.walletRequest} 
                                 unchooseWalletHandle={this.unchooseWallet}
                                  addWalletHandle={this.addWallet}/>
+
                     <BudState selectedWalletHandle={walletSelected}/>
                 </div>
             )
