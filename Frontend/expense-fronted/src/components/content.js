@@ -81,7 +81,7 @@ class content extends Component {
 
         else if (walletExist === true && walletSelected === " ") {
             return (
-                <div><CardDeck>{this.state.allWallets.data.map(eachWallet => (
+                <div><CardDeck style={{marginLeft:"1%",marginRight:"1%"}}>{this.state.allWallets.data.map(eachWallet => (
                     <WalletCard key={eachWallet._id} eachWalletHandle={eachWallet} 
                     chooseWalletHandle={this.chooseWallet} 
                     refresh={this.refresh}/>

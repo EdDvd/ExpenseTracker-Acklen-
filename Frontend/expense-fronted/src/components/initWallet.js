@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Modal from 'react-modal'
 import Axios from 'axios'
-
+import './styles/initWallet.css'
 
 class NewWallet extends Component {
     constructor(props) {
@@ -89,18 +89,19 @@ class NewWallet extends Component {
         
         return (
 
-            <Container>
-                <Modal isOpen={this.state.showModal}>
+            <Container className="initWallet">
+                <Modal  className="modalInit"
+                        isOpen={this.state.showModal}>
                     <p>{this.state.message}</p>
                     <Button onClick={this.closeModal}>OK</Button>
                 </Modal>
                 <Form onSubmit={this.submitMethod}>
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Name of Wallet</Form.Label>
+                        <Form.Label><strong>Name of Wallet</strong></Form.Label>
                         <Form.Control type="text" placeholder="" name="name" onChange={this.changeMethod} />
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword" >
-                        <Form.Label>Budget</Form.Label>
+                        <Form.Label><strong>Budget</strong></Form.Label>
                         <Form.Control type="money" placeholder="" name="budget" onChange={this.changeBudgetMethod} />
                     </Form.Group>
                     <Button variant="primary" type="submit">

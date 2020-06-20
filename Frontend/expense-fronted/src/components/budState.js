@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './styles/budState.css'
 import Button from 'react-bootstrap/Button'
 import Badge from 'react-bootstrap/Badge'
 import Row from 'react-bootstrap/Row'
@@ -84,7 +85,7 @@ class budState extends Component {
 
         return (
             <div>
-                <Container>
+                <Container className="budState">
                     <Col md={{ span: 4, offset: 4 }} >
                         <Row ><Col><h1><Badge variant='success'>Presupuesto</Badge></h1></Col><Col><h1>{this.state.budget}</h1></Col></Row>
                         <Row><Col><h2>Inputs</h2></Col> <Col><h2>{this.state.inputs}</h2></Col></Row>
@@ -94,7 +95,9 @@ class budState extends Component {
                     <Button onClick={this.showModalMethod}>Expand</Button>{'  '}
                     <Button onClick={this.showAddModal}>New</Button>
 
-                    <Modal isOpen={this.state.showModal}>
+                    <Modal isOpen={this.state.showModal}
+                             className="transModal">
+                    <div>
                         <h4>In: {this.state.inputs}</h4>
                         <h4>Out: {this.state.outputs}</h4>
                         {this.state.transArray.map(transaction => (
@@ -105,6 +108,7 @@ class budState extends Component {
                         )
                         )}
                         <Button onClick={this.closeModalMethod}>Close</Button>
+                     </div>
                     </Modal>
                         <Transaction ID={this.state.walletSelected}                               
                                  modalOpenHandle={this.state.addModal} 

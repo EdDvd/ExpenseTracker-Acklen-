@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Axios from 'axios'
+import './styles/walletCard.css'
 class walletCard extends Component {
     constructor(props) {
         super(props)
@@ -28,7 +29,7 @@ class walletCard extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="walletCard">
                 <Card
                     bg={this.state.bgColor}
                     text={"light"} 
